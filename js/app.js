@@ -26,6 +26,7 @@ const ui = new UI();
 
 ui.btnStart.addEventListener("click", function () {
   startTimer(10);
+  startTimerLine();
 
   ui.quizBox.classList.add("active");
   ui.buttonBox.classList.remove("active");
@@ -38,6 +39,7 @@ ui.btnStart.addEventListener("click", function () {
 ui.btnNext.addEventListener("click", function () {
   if (quiz.sorular.length != quiz.soruIndex) {
     startTimer(10);
+    startTimerLine();
 
     ui.soruGoster(quiz.soruGetir());
     ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
@@ -52,6 +54,8 @@ ui.btnNext.addEventListener("click", function () {
 
 function optionSelected(e) {
   clearInterval(counter);
+  clearInterval(counterLine);
+
   let selectedElement = e.target;
 
   if (selectedElement.nodeName == "SPAN") {
@@ -100,5 +104,20 @@ function startTimer(time) {
       quiz.soruIndex += 1;
       ui.btnNext.classList.add("show");
     }
+  }
+}
+let counterLine;
+function startTimerLine() {
+  let line_width = 0;
+
+  counterLine = setInterval(timer, 20);
+
+  function timer() {
+    line_width += 1;
+    ui.timeLine.style.width = line_width + "px";
+
+    if (line_width > 549) {
+      clearInterval(counterLine);
+    } 
   }
 }

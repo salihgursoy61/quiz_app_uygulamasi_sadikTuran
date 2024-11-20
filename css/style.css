@@ -11,6 +11,8 @@
   justify-content: space-between;
   align-items: center;
   color: black;
+
+  position: relative;
 }
 .option-list {
   padding: 18px 10px;
@@ -103,10 +105,23 @@
   width: 25px;
   text-align: center;
 }
-.btn-next{
-  display: none;
+.btn-next {
+  opacity: 0;
+
+  transform: scale(0.9);
+  transition: all .3s ease;
+}
+.btn-next.show {
+  opacity: 1;
+  transform: scale(1);
 
 }
-.btn-next.show{
-  display: block;
+
+.time-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: #f0a500;
+  width: 1px;
 }

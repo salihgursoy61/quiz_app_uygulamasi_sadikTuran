@@ -14,6 +14,7 @@ function UI() {
 
   this.timeText = document.querySelector(".time-text");
   this.timeSecond = document.querySelector(".time-second");
+  this.timeLine = document.querySelector(".time-line");
 }
 
 UI.prototype.soruGoster = function (soru) {

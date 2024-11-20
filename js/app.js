@@ -25,17 +25,23 @@ const quiz = new Quiz(soruListesi);
 const ui = new UI();
 
 ui.btnStart.addEventListener("click", function () {
+  startTimer(10);
+
   ui.quizBox.classList.add("active");
   ui.buttonBox.classList.remove("active");
 
   ui.soruGoster(quiz.soruGetir());
   ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
+  ui.btnNext.classList.remove("show");
 });
 
 ui.btnNext.addEventListener("click", function () {
   if (quiz.sorular.length != quiz.soruIndex) {
+    startTimer(10);
+
     ui.soruGoster(quiz.soruGetir());
     ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
+    ui.btnNext.classList.remove("show");
   } else {
     ui.scoreBox.classList.add("active");
     ui.quizBox.classList.remove("active");
@@ -45,6 +51,7 @@ ui.btnNext.addEventListener("click", function () {
 });
 
 function optionSelected(e) {
+  clearInterval(counter);
   let selectedElement = e.target;
 
   if (selectedElement.nodeName == "SPAN") {
@@ -64,6 +71,7 @@ function optionSelected(e) {
   }
   quiz.soruIndex += 1;
   ui.disabledAllOption();
+  ui.btnNext.classList.add("show");
 }
 
 ui.btnQuit.addEventListener("click", function () {
@@ -76,3 +84,21 @@ ui.btnReplay.addEventListener("click", function () {
   ui.btnStart.click();
   ui.scoreBox.classList.remove("active");
 });
+let counter;
+function startTimer(time) {
+  counter = setInterval(timer, 1000);
+
+  function timer() {
+    ui.timeSecond.textContent = time;
+    time--;
+
+    if (time < 0) {
+      clearInterval(counter);
+      ui.timeText.textContent = "Sure Bitti";
+
+      ui.disabledAllOption();
+      quiz.soruIndex += 1;
+      ui.btnNext.classList.add("show");
+    }
+  }
+}

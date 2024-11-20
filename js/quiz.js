@@ -1,7 +1,7 @@
 function Quiz(sorular) {
   this.soruIndex = 0;
-  this.sorular = sorular;
   this.dogruCevapSayisi = 0;
+  this.sorular = sorular;
 }
 
 Quiz.prototype.soruGetir = function () {

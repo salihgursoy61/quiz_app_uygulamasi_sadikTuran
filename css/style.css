@@ -35,3 +35,27 @@
 .option-list .option.disabled {
   pointer-events: none;
 }
+
+/* score box */
+
+#score-box {
+  text-align: center;
+  padding: 30px;
+}
+#score-box i {
+  font-size: 90px;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+#score-box .score-text {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

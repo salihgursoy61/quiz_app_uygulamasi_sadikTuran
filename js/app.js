@@ -24,14 +24,22 @@ const soruListesi = [
 const quiz = new Quiz(soruListesi);
 const ui = new UI();
 
-console.log(quiz);
+ui.btnStart.addEventListener("click", function () {
+  ui.quizBox.classList.add("active");
+  ui.buttonBox.classList.remove("active");
+
+  ui.soruGoster(quiz.soruGetir());
+  ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
+});
 
 ui.btnNext.addEventListener("click", function () {
   if (quiz.sorular.length != quiz.soruIndex) {
     ui.soruGoster(quiz.soruGetir());
     ui.soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
   } else {
-    console.log("quiz bitti");
+    ui.scoreBox.classList.add("active");
+    ui.quizBox.classList.remove("active");
+
     ui.skoruGoster(quiz.dogruCevapSayisi, quiz.sorular.length);
   }
 });
@@ -65,6 +73,6 @@ ui.btnReplay.addEventListener("click", function () {
   quiz.soruIndex = 0;
   quiz.dogruCevapSayisi = 0;
   // start butonu
-  ui.btnNext.click();
-  ui.skoruGoster(quiz.dogruCevapSayisi, quiz.sorular.length);
+  ui.btnStart.click();
+  ui.scoreBox.classList.remove("active");
 });
